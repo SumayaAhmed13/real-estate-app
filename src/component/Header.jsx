@@ -18,11 +18,11 @@ const Header=()=>{
             <div>
                  <ul className=' flex space-x-10'>
                     <li className={` cursor-pointer py-3 text-sm font-semibold text-gray-500 border-b-4 border-b-transparent ${currentLocation("/")
-                && " text-black border-b-blue-500 "}`} onClick={()=>navigate("/")}>Home</li>
+                && " text-black border-b-blue-400 "}`} onClick={()=>navigate("/")}>Home</li>
                     <li className={` cursor-pointer py-3 text-sm font-semibold text-gray-500 border-b-4 border-b-transparent ${currentLocation("/offers")
-                && " text-black border-b-blue-500 "}`} onClick={()=>navigate("/offers")}>Offers</li>
+                && " text-black border-b-blue-400 "}`} onClick={()=>navigate("/offers")}>Offers</li>
                     <li className={` cursor-pointer py-3 text-sm font-semibold text-gray-500 border-b-4 border-b-transparent ${currentLocation("/sign-in")
-                && " text-black border-b-blue-500 "}`} onClick={()=>navigate("/sign-in")}>Sign In</li>
+                && " text-black border-b-blue-400 "}`} onClick={()=>navigate("/sign-in")}>Sign In</li>
             
                  </ul>
             </div>

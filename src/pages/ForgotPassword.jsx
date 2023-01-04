@@ -19,7 +19,7 @@ import OAuth from "../component/OAuth";
         </div>
         <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
           <form >
-            <input className="w-full px-4 py-2 text-xl text-gray-700 bg-white rounded transition ease-in-out mb-6" type="email" id='email' value={email} onChange={changeHandler}placeholder="Email Address" autoComplete="off" />
+            <input className="w-full px-4 py-2 text-xl text-gray-700 bg-white rounded transition ease-in-out mb-6" type="email" id='email' value={email} onChange={changeHandler}placeholder="Email" autoComplete="off" />
           
            
             <div className=" flex justify-between whitespace-nowrap text-sm sm:text-lg">

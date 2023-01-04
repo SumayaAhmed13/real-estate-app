@@ -32,7 +32,7 @@ import OAuth from "../component/OAuth";
         </div>
         <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
           <form >
-            <input className="w-full px-4 py-2 text-xl text-gray-700 bg-white rounded transition ease-in-out mb-6" type="email" id='email' value={email} onChange={changeHandler}placeholder="Email Address" autoComplete="off" />
+            <input className="w-full px-4 py-2 text-xl text-gray-700 bg-white rounded transition ease-in-out mb-6" type="email" id='email' value={email} onChange={changeHandler}placeholder="Email" autoComplete="off" />
             <div className="relative mb-6">
             <input className="w-full px-4 py-2 text-xl text-gray-700 bg-white rounded transition ease-in-out" 
             type={showPassword?'text':'password'} id='password' value={password} onChange={changeHandler}placeholder="Password" autoComplete="off" />
@@ -43,7 +43,7 @@ import OAuth from "../component/OAuth";
                 <Link to="/sign-up" className="text-red-500 hover:text-red-700 transition duration-200 ease-in-out ml-1">Register</Link>
                 </p>
                 <p>
-                  <Link to="/forgot-password" className="text-blue-500 hover:text-blue-700 transition duration-200 ease-in-out">Forget Password!</Link>
+                  <Link to="/forgot-password" className="text-blue-500 hover:text-blue-700 transition duration-200 ease-in-out">Forget Password?</Link>
                 </p>
             </div>
             <button type="submit" className="w-full bg-blue-600 text-white px-7 py-3 text-sm font-medium uppercase rounded shadow-md hover:bg-blue-800 transition duration-150 ease-in-out hover:shadow-lg active:bg-blue-800">Sign In</button>

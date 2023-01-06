@@ -1,8 +1,11 @@
 import { useState } from "react";
 import LognIn from "../Asset/Img/login.svg";
 import {AiFillEyeInvisible,AiFillEye} from 'react-icons/ai';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import OAuth from "../component/OAuth";
+import { toast } from "react-toastify";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+
 
  const SignIn=()=> {
   const [fromData,setFromData]=useState({
@@ -10,6 +13,7 @@ import OAuth from "../component/OAuth";
   password:''
   });
   const [showPassword,setShowPassword]=useState(false);
+  const navigate=useNavigate();
 
   const{email,password}=fromData;
   const changeHandler=(e)=>{
@@ -22,6 +26,21 @@ import OAuth from "../component/OAuth";
 
 
   }
+  const onSumitHandler=async(e)=>{
+
+     e.preventDefault();
+     try {
+      const auth=getAuth();
+      const userCredential=await signInWithEmailAndPassword(auth,email,password);
+      if(userCredential.user){
+        navigate("/")
+      }
+      
+     } catch (error) {
+      toast.error("Something went wrong when Sign In");
+     }
+     
+  }
 
   return (
     <section>
@@ -31,7 +50,7 @@ import OAuth from "../component/OAuth";
           <img src={LognIn} alt='key' className=" w-full rounded-2xl"/>
         </div>
         <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
-          <form >
+          <form onSubmit={onSumitHandler}>
             <input className="w-full px-4 py-2 text-xl text-gray-700 bg-white rounded transition ease-in-out mb-6" type="email" id='email' value={email} onChange={changeHandler}placeholder="Email" autoComplete="off" />
             <div className="relative mb-6">
             <input className="w-full px-4 py-2 text-xl text-gray-700 bg-white rounded transition ease-in-out" 

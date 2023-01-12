@@ -1,9 +1,10 @@
 import { getAuth, updateProfile } from "firebase/auth";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { doc, updateDoc} from 'firebase/firestore';
 import { db } from '../firebase';
+import {FcHome} from 'react-icons/fc'
 
 const Profile=()=> {
   const auth=getAuth();
@@ -63,6 +64,13 @@ const onSubmitHandler=async()=>{
             <p className=" text-blue-600 hover:text-blue-800 transition duration-200 cursor-pointer" onClick={onSingOut}>Sign Out</p>
           </div>
         </from>
+        <button type="submit" className=" w-full bg-blue-400 text-white uppercase px-7 py-3 text-sm font-semibold rounded shadow-md hover:bg-blue-600 duration-150 transition ease-in-out hover:shadow-lg active:bg-blue-800">
+          <Link to="/create-listing" className=" flex justify-center items-center">
+          <FcHome className=" mr-2 text-3xl bg-red-400 rounded-full p-1 border-2"/>
+            Sell/Rent Your Home
+          </Link>
+       
+        </button>
       </div>
     </section>
     </>

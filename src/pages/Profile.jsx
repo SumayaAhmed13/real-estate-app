@@ -1,13 +1,17 @@
 import { getAuth, updateProfile } from "firebase/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { doc, updateDoc} from 'firebase/firestore';
+import { collection, doc, getDocs, orderBy, query, updateDoc, where} from 'firebase/firestore';
 import { db } from '../firebase';
-import {FcHome} from 'react-icons/fc'
+import {FcHome} from 'react-icons/fc';
+import  ListingItem  from "../component/ListingItem";
+
 
 const Profile=()=> {
   const auth=getAuth();
+  const [listing,setListing]=useState(null);
+  const [loading,setLoading]=useState(true);
   const[fromData,setFromData]=useState({
     name:auth.currentUser.displayName,
     email:auth.currentUser.email
@@ -47,6 +51,25 @@ const onSubmitHandler=async()=>{
   }
 
 }
+useEffect(()=>{
+  async function fetchUserListing(){
+    const listingRef=collection(db,"listings");
+    const q=query(listingRef,where("userRef","==",auth.currentUser.uid),
+    orderBy("timestamp","desc")
+    );
+    const querySnap=await getDocs(q);
+    let listing=[];
+    querySnap.forEach((doc)=>{
+   return listing.push({
+     id:doc.id,
+     data:doc.data()
+   })
+    })
+    setListing(listing);
+    setLoading(false);
+  }
+ fetchUserListing();
+},[auth.currentUser.uid])
   return (
     <>
     <section className=" max-w-6xl mx-auto flex justify-center items-center flex-col">
@@ -73,6 +96,19 @@ const onSubmitHandler=async()=>{
         </button>
       </div>
     </section>
+    <div className=" max-w-6xl px-3 mt-6 mx-auto">
+      {
+        !loading && listing.length>0 && (
+            <>
+            <h2 className="text-3xl text-center font-bold">My Listing</h2>
+            <ul>
+              {listing.map((listing)=>(<ListingItem key={listing.id} id={listing.id} listing={listing.data}/>))}
+            </ul>
+            </>
+
+        )
+      }
+    </div>
     </>
   )
 }

@@ -72,7 +72,7 @@ useEffect(()=>{
 },[auth.currentUser.uid])
 
 const onDelete=async(listingId)=>{
-  if(window.confirm("Are you sure to delete")){
+  if(window.confirm("Are you sure to delete !")){
    await deleteDoc(doc(db,"listings",listingId));
    const updateListing=listing.filter(
     (listing)=>listing.id !==listingId

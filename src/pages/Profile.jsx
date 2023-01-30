@@ -92,6 +92,7 @@ const  onEdit=(listingId)=>{
     <section className=" max-w-6xl mx-auto flex justify-center items-center flex-col">
       <h1 className="text-3xl text-center mt-6 font-bold">My Profile</h1>
       <div className=" w-full md:w-[50%] mt-6 px-3">
+      
         <from>
           <input type="text" id="name" value={name} disabled={!changeDetail} className={`w-full py-2 px-4 text-xl text-gray-700 bg-white border border-gray-300 rounded transition ease-in-out mb-6 ${changeDetail && "bg-red-400 focus:bg-red-200"}`} onChange={onChangeHandler}/>
 

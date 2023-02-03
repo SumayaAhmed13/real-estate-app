@@ -9,14 +9,17 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import SwiperCore, { Navigation, Pagination,EffectFade,Autoplay} from 'swiper';
 import {FaShare,FaMapMarkerAlt,FaBed,FaBath,FaParking} from "react-icons/fa";
 import {GiLift}from "react-icons/gi";
-
+import { getAuth } from "firebase/auth";
 import 'swiper/css/bundle';
+import Contact from '../component/Contact';
+
  const  Listing= () => {
+  const auth=getAuth();
   const params=useParams();
   const [listing,setListing]=useState(null);
   const [loading,setLoading]=useState(true);
   const [linkCopy,setLinkCopy]=useState(false);
-
+  const [contactOwer,setContactOwer]=useState(false);
   SwiperCore.use([Autoplay,Navigation,Pagination])
   useEffect(() => {
     async function fetchListing() {
@@ -61,7 +64,7 @@ import 'swiper/css/bundle';
       <p className=' fixed top-[23%] right-[5%] z-10 font-semibold border-2 border-gray-200 rounded-md bg-white p-2 text-green-400'>Link Copied</p>
     )}
     <div className=' flex flex-col md:flex-row m-4 max-w-6xl lg:mx-auto p-4 rounded-lg border-3 bg-white shadow-lg lg:space-x-5'>
-      <div className='w-full h-[200px] lg-[400px]'>
+      <div className='w-full'>
       <p className=' text-2xl font-bold mb-3 text-blue-900'>
           {listing.name} - BDT {listing.offer?listing.discountedPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","):listing.regularPrice.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} {listing.type==="rent"?" / month":""}
       </p>
@@ -80,13 +83,19 @@ import 'swiper/css/bundle';
   
        </div>
        <p className='mt-3 mb-3 whitespace-nowrap'><span className=' font-semibold'>Description - </span>{listing.description}</p>
-       <ul className=' flex items-center space-x-2 sm:space-x-10 font-semibold text-sm'>
+       <ul className=' flex items-center space-x-2 sm:space-x-10 font-semibold text-sm mb-6'>
         <li className=' flex items-center'><FaBed className=' text-lg mr-1' /> {+listing.bedrooms>1? `${listing.bedrooms} Beds`:"1 Bed"}</li>
         <li className=' flex items-center'><FaBath className=' text-lg mr-1' /> {+listing.bathrooms>1? `${listing.bathrooms} Baths`:"1 Bath"}</li>
         <li className=' flex items-center'><FaParking className=' text-lg mr-1' /> {listing.parking?"Parking Spot":"No Parking"}</li>
         <li className=' flex items-center'><GiLift className=' text-lg mr-1' /> {listing.lift?"Lift":"No Lift"}</li>
-        
-       </ul>
+        </ul>
+        {listing.userRef !== auth.currentUser?.uid && !contactOwer && (
+        <div className='mt-4'>
+          <button onClick={()=>setContactOwer(true)} className=' px-7 py-3 font-medium text-white rounded-md bg-blue-500 text-sm uppercase shadow hover:bg-blue-800 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg text-center transition duration-150 ease-in-out w-full'>Contact Ower</button>
+        </div>)}
+        {contactOwer && <Contact useRef={listing.userRef} listing={listing}/>}
+       
+   
       </div>
       <div className=' bg-blue-400 w-full h-[200px] lg-[400px] z-10 overflow-x-hidden'>
       

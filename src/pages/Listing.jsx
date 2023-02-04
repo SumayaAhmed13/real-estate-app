@@ -108,7 +108,7 @@ import { Popup } from 'react-leaflet';
     />
     <Marker position={[listing.geolocation.lat, listing.geolocation.lon]}>
       <Popup>
-        A pretty CSS3 popup. <br /> Easily customizable.
+        {listing.address}
       </Popup>
     </Marker>
   </MapContainer>

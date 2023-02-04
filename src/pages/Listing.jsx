@@ -12,7 +12,10 @@ import {GiLift}from "react-icons/gi";
 import { getAuth } from "firebase/auth";
 import 'swiper/css/bundle';
 import Contact from '../component/Contact';
-
+import { MapContainer } from 'react-leaflet';
+import { TileLayer } from 'react-leaflet';
+import { Marker } from 'react-leaflet';
+import { Popup } from 'react-leaflet';
  const  Listing= () => {
   const auth=getAuth();
   const params=useParams();
@@ -97,8 +100,18 @@ import Contact from '../component/Contact';
        
    
       </div>
-      <div className=' bg-blue-400 w-full h-[200px] lg-[400px] z-10 overflow-x-hidden'>
-      
+      <div className=' w-full h-[200px] lg:h-[400px] z-10 overflow-x-hidden md:mt-0 md:ml-2 md:mb-3'>
+      <MapContainer center={[listing.geolocation.lat, listing.geolocation.lon]} zoom={13} scrollWheelZoom={false} style={{height:"100%",width:"100%"}}>
+      <TileLayer
+      attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    />
+    <Marker position={[listing.geolocation.lat, listing.geolocation.lon]}>
+      <Popup>
+        A pretty CSS3 popup. <br /> Easily customizable.
+      </Popup>
+    </Marker>
+  </MapContainer>
       </div>
     </div>
    </main>

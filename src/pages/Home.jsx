@@ -1,7 +1,10 @@
-import React from 'react'
 
-export default function Home() {
+import Slider from "../component/Slider"
+
+const  Home=()=>{
+  
   return (
-    <div>Home</div>
+    <div><Slider/></div>
   )
 }
+export default Home;

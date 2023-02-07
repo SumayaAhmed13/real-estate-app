@@ -111,7 +111,7 @@ import { Popup } from 'react-leaflet';
         {listing.address}
       </Popup>
     </Marker>
-  </MapContainer>
+    </MapContainer>
       </div>
     </div>
    </main>

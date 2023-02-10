@@ -10,7 +10,7 @@ import Header from "./component/Header";
 import CreateListing  from "./pages/CreateListing";
 import { ToastContainer} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { Category } from "./pages/Category";
+import Category from "./pages/Category";
 import EditListing from "./pages/EditListing";
 import Listing  from "./pages/Listing";
 
@@ -38,9 +38,10 @@ function App() {
         <Route path="/edit-listing" element={<PrivateOutlet/>}>
           <Route path="/edit-listing/:listingId" element={<EditListing/>}/>
         </Route>
-        <Route path="/category" element={<PrivateOutlet/>}>
-          <Route path="/category" element={<Category/>}/>
-        </Route>
+        <Route path="/category/:categoryName" element={<Category/>}/>
+        {/* <Route path="/category" element={<PrivateOutlet/>}>
+          <Route path="/category/:categoryName" element={<Category/>}/>
+        </Route> */}
      
       </Routes>
      </Router>
